@@ -164,7 +164,7 @@ public abstract class Hangman {
 		if (this.getIncorrectGuesses().size() > 0) {
 			System.out.println("Incorrect guesses: " + this.getIncorrectGuesses());
 		}					
-	}
+	} 
 	/**
 	 * This function prints the final result to the user.
 	 */

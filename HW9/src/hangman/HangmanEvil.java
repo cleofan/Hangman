@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HangmanEvil extends Hangman {
-	
+	  
 	//instance variables
 	/**
 	 * This ArrayList stores all words with the same length as the 

@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class HangmanGame {
 	
 	//variables
-
-	String ha;
+      
 	/**
 	 * Flag of whether or not the game is on.
 	 */
