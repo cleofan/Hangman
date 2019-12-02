@@ -169,6 +169,8 @@ public class HangmanGame {
 					//Reset the userAnswer to empty String.
 					userAnswer = "";
 				}
+				
+				System.out.println();
 			
 			}
 				
