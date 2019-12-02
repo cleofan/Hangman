@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
  * This class parse through the given file, and return an ArrayList of words qualified
  * for playing the Hangman game.
  * @author mengyaofan
- *
  */
 
 public class FileProcessing {
