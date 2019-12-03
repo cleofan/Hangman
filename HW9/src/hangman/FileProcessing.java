@@ -82,11 +82,36 @@ public class FileProcessing {
 				//add the word to the ArrayList if it's not empty
 				if (!word.equals("")) FileProcessing.getUncleanedWords().add(word);
 			}
+			sc.close();
 		}catch(FileNotFoundException e) {
 			//when the file doesn't exist, print the msg to users
 			e.printStackTrace();
 			System.out.println("The filename entered does not exist.");
 		}
+		
+			 
+			//Create an iterator
+			Iterator<String> iterator = FileProcessing.getUncleanedWords().iterator();
+
+			//Create a String Regex. Only words with all lowercase letters and no space can be selected.
+			String regex = "[^a-z]+";
+			
+			//Parse through the current ArrayList
+			while (iterator.hasNext()) {
+				//Store the iterator result as a word
+				String word = iterator.next().trim();
+				
+				//create pattern and matcher
+				Pattern pattern = Pattern.compile(regex);
+				Matcher matcher = pattern.matcher(word);
+				
+				
+				//add the word to the qualified array if 
+				if (!matcher.find()) FileProcessing.getQUALIFIED_WORDS().add(word);
+				
+			}
+
+			
 
 	
 	}
