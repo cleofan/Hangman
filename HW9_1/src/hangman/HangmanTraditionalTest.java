@@ -17,8 +17,8 @@ class HangmanTraditionalTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		FileProcessing.readAndStore("words_clean.txt");
-		FileProcessing.parseAndClean();
+		FileProcessing.readAndClean("words_clean.txt");
+	
 		this.word1 = "";
 		this.traditional1 = new HangmanTraditional(word1);
 		
