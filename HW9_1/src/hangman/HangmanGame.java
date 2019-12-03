@@ -1,4 +1,10 @@
 package hangman;
+/**
+ * This class controls the flow of the Hangman Game.
+ * It will select one version of the hangman game, and ask for user input, and stop when the word is guessed.
+ * @author Mengyao Fan
+ * @author Xiaofan Li
+ */
 
 import java.util.Random;
 import java.util.Scanner;
@@ -83,8 +89,8 @@ public class HangmanGame {
 		HangmanGame game = new HangmanGame();
 
 		//Import dictionary and get all qualified words.
-		FileProcessing.readAndStore("words.txt");
-		FileProcessing.parseAndClean();
+		FileProcessing.readAndClean("words.txt");
+		
 
 		//while the game is on
 		while (game.getPlay()) {
