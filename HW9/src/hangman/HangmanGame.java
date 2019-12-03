@@ -88,8 +88,7 @@ public class HangmanGame {
 		
 		//Import dictionary and get all qualified words.
 		FileProcessing.readAndStore("words.txt");
-		FileProcessing.parseAndClean();
-				
+	
 		//while the game is on
 		while (game.getPlay()) {
 			
