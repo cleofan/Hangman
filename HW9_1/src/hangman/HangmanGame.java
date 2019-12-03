@@ -83,7 +83,7 @@ public class HangmanGame {
 		HangmanGame game = new HangmanGame();
 
 		//Import dictionary and get all qualified words.
-		FileProcessing.readAndStore("words_clean.txt");
+		FileProcessing.readAndStore("words.txt");
 		FileProcessing.parseAndClean();
 
 		//while the game is on
@@ -95,7 +95,7 @@ public class HangmanGame {
 
 			//Generate a random word to be guessed.
 			int DICTIONARY_SIZE = FileProcessing.getQUALIFIED_WORDS().size();
-			String wordToBeGuessed = FileProcessing.getQUALIFIED_WORDS().get(random.nextInt(DICTIONARY_SIZE + 1));
+			String wordToBeGuessed = FileProcessing.getQUALIFIED_WORDS().get(random.nextInt(DICTIONARY_SIZE));
 
 			//Set up the GAME_VERSIONS array.
 			game.setGAME_VERSIONS(wordToBeGuessed);
