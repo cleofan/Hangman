@@ -6,75 +6,127 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class HangmanTest {
+	private String word1;	
+	Hangman traditional1;
+	Hangman evil1;
+	
+	private String word2;
+	Hangman traditional2;
+	Hangman evil2;
+	
+	private String word3;
+	Hangman traditional3;
+	Hangman evil3;
+	
+	
 
 	@BeforeEach
-	void setUp() throws Exception {
-		String word1 = "";
-		Hangman traditional1 = new HangmanTraditional(word1);
-		Hangman evil1 = new HangmanEvil(word1);
+	void SetUp() throws Exception{
+		FileProcessing.readAndStore("words_clean.txt");
+		FileProcessing.parseAndClean();
+		this.word1 = "";
+		this.traditional1 = new HangmanTraditional(word1);
+		this.evil1 = new HangmanEvil(word1);
+		
+		this.word2 = "aaa";
+		this.evil2 = new HangmanEvil(word2);
+		this.traditional2 = new HangmanTraditional(word2);
+		
+		this.word3 = "yogurt";
+		this.evil3 = new HangmanEvil(word3);
+		this.traditional3 = new HangmanTraditional(word3);
+		
 	}
 
 	@Test
 	void testHangman() {
 		
-		//Case 1
-		//When the word is an empty string
-		String word1 = "";
-		//Initiate the two versions.
-		Hangman traditional1 = new HangmanTraditional(word1);
-		Hangman evil1 = new HangmanEvil(word1);
-		//Word length and the size of the wordPrint list should be 0
+		
 		assertTrue(traditional1.getWordLength() == 0);
 		assertTrue(evil1.getWordPrint().size() == 0);
 		
-		//Case2
-		//When the word is "a"
-		String word2 = "a";
-		//Initiate the two versions.
-		Hangman traditional2 = new HangmanTraditional(word2);
-		Hangman evil2 = new HangmanEvil(word2);
-		//The initial hitCount shoud be 0
-		assertEquals(0, traditional2.getHitCount());
-		//The word length is 1
-		assertEquals(1, evil2.getWordLength());
 		
-		//Case3
-		//When the word is yogurt
-		String word3 = "yogurt";
-		//Initiate the two versions.
-		Hangman traditional3 = new HangmanTraditional(word3);
-		Hangman evil3 = new HangmanEvil(word3);
-		//The initial size of te incorrectGuesses will be 0.
+		assertEquals(0, traditional2.getHitCount());		
+		assertEquals(3, evil2.getWordLength());
+		
+		
+		
 		assertEquals(0, traditional3.getIncorrectGuesses().size());
-		//The word length is 6
 		assertEquals(6, evil3.getWordLength());
 		
 	}
 
 	@Test
 	void testUpdateIncorrectGuesses() {
-		//When the word to be guessed is an empty string. All entered letters should be in the IncorrectGuesses.
+		
+		
+		traditional1.updateIncorrectGuesses(traditional1.getIncorrectGuesses(), "a");
+		evil1.updateIncorrectGuesses(evil1.getIncorrectGuesses(), "c");
+		
+		assertEquals("a", traditional1.getIncorrectGuesses().get(0));
+		assertTrue(evil1.getIncorrectGuesses().size() == 1);
+		
+		traditional2.compareAndUpdate("b");
+		traditional2.updateIncorrectGuesses(traditional2.getIncorrectGuesses(), "c");
+		assertEquals("c", traditional2.getIncorrectGuesses().get(1));
+		evil2.compareAndUpdate("a");
+		evil2.updateIncorrectGuesses(evil2.getIncorrectGuesses(), "b");
+		assertTrue(evil2.getIncorrectGuesses().get(1).contentEquals("b"));
+		
+		traditional3.compareAndUpdate("g");
+		traditional3.updateIncorrectGuesses(traditional3.getIncorrectGuesses(), "a");
+		assertTrue(traditional3.getIncorrectGuesses().size() == 1);
+		evil3.compareAndUpdate("y");
+		evil3.updateIncorrectGuesses(evil3.getIncorrectGuesses(), "c");
+		assertEquals("y", evil3.getIncorrectGuesses().get(0));
 		
 	}
 
 	@Test
 	void testIsGameOver() {
-		fail("Not yet implemented"); // TODO
+		
+		assertTrue(traditional1.isGameOver());
+		assertTrue(evil1.isGameOver());
+		
+		
+		evil2.compareAndUpdate("a");
+        traditional2.compareAndUpdate("a");
+		assertTrue(traditional2.isGameOver());
+		assertFalse(evil2.isGameOver());
+	
+		
+	
+		traditional3.compareAndUpdate("y");
+		evil3.compareAndUpdate("y");
+		assertFalse(traditional3.isGameOver());
+		assertFalse(evil3.isGameOver());
+	
+	
+		
 	}
 
 	@Test
 	void testGuessedOrNot() {
-		fail("Not yet implemented"); // TODO
+		
+		assertFalse(traditional1.guessedOrNot("a"));
+		assertFalse(evil1.guessedOrNot("b"));
+		
+		
+	    traditional2.compareAndUpdate("a");
+	    evil2.compareAndUpdate("a");
+	    
+	   assertTrue(traditional2.guessedOrNot("a"));
+	   assertTrue(evil2.guessedOrNot("a"));
+	   
+	   traditional3.compareAndUpdate("y");
+	   assertTrue(traditional3.guessedOrNot("y"));
+	   evil3.compareAndUpdate("y");
+	   assertFalse(evil3.guessedOrNot("o"));
+	   
+	    
+	    
+	 
 	}
 
-	@Test
-	void testPrintWord() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testPrintFinalResult() {
-		fail("Not yet implemented"); // TODO
-	}
-
+	
 }
